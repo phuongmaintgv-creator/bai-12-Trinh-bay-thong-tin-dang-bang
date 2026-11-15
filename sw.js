@@ -14,7 +14,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== STATIC_CACHE && k !== 'bai12-media-v1').map(k => caches.delete(k))))
+    caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('bai12-') && k !== STATIC_CACHE && k !== 'bai12-media-v1').map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
